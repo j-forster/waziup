@@ -1,0 +1,10 @@
+import { ID, Sensor, ValueWithTime, Meta } from "./waziup";
+export declare function getDeviceSensors(device: ID): Promise<Sensor[]>;
+export declare function addDeviceSensor(device: ID, sensor: Sensor): Promise<ID>;
+export declare function getDeviceSensor(device: ID, sensor: ID): Promise<Sensor>;
+export declare var deleteDeviceSensor: (device: string, sensor: string) => Promise<void>;
+export declare var getDeviceSensorValue: (device: string, sensor: string) => Promise<any>;
+export declare var addDeviceSensorValue: (device: string, sensor: string, val: any) => Promise<void>;
+export declare function getDeviceSensorValues(device: ID, sensor: ID): Promise<ValueWithTime[]>;
+export declare var addDeviceSensorValues: (device: string, sensor: string, val: any[] | ValueWithTime[]) => Promise<void>;
+export declare var setDeviceSensorMeta: (device: string, sensor: string, meta: Meta) => Promise<void>;

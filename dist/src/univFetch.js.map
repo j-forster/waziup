@@ -1,1 +1,0 @@
-{"version":3,"file":"univFetch.js","sourceRoot":"","sources":["../../src/univFetch.ts"],"names":[],"mappings":"AAAA,IAAI,SAAwE,CAAC;AAE7E,IAAI,OAAO,CAAC,KAAK,KAAK,SAAS,EAAE;IAC7B,SAAS,GAAG,OAAO,CAAC,YAAY,CAAC,CAAC;CACrC;KAAM;IACH,SAAS,GAAG,MAAM,CAAC,KAAK,CAAC;CAC5B;AAED,OAAO,CAAC,KAAK,GAAG,SAAS,CAAC"}

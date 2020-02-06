@@ -1,4 +1,8 @@
 {
+    "include": [
+        "index.ts",
+        "src/**/*"
+    ],
     "compilerOptions": {
         "module": "commonjs",
         "noImplicitAny": true,

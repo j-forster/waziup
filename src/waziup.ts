@@ -227,6 +227,15 @@ export class Waziup {
     }
 
     /**
+     * Get all the declared devices.
+     */
+    async getDevices(): Promise<Device[]> {
+        var devices = await this.get<Device[]>("devices");
+        devices.forEach(polishDevice);
+        return devices;
+    }
+
+    /**
      * Get the name of a device.
      */
     async getDeviceName(device: ID): Promise<string>;
@@ -720,6 +729,10 @@ export class Waziup {
         var data = await resp.json();
         if(!resp.ok) throw data;
         return data as T;
+    }
+
+    async fetch(path: string, init?: RequestInit): Promise<Response> {
+        return univFetch(path, init);
     }
 
     /**

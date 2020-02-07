@@ -82,6 +82,7 @@ export declare class Waziup {
     getID(): Promise<ID>;
     getDevice(id?: ID): Promise<Device>;
     getDevice(): Promise<Device>;
+    getDevices(): Promise<Device[]>;
     getDeviceName(device: ID): Promise<string>;
     getDeviceName(): Promise<string>;
     setDeviceName(device: ID, name: string): Promise<void>;
@@ -141,6 +142,7 @@ export declare class Waziup {
     subscribe(path: string, cb: (data: any) => void): Promise<void>;
     unsubscribe(path: string, cb: (data: any) => void): Promise<void>;
     get<T>(path: string): Promise<T>;
+    fetch(path: string, init?: RequestInit): Promise<Response>;
     del(path: string): Promise<void>;
     set<T = void>(path: string, val: any): Promise<T>;
 }

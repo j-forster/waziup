@@ -25,6 +25,11 @@ class Waziup {
         polishDevice(device);
         return device;
     }
+    async getDevices() {
+        var devices = await this.get("devices");
+        devices.forEach(polishDevice);
+        return devices;
+    }
     async getDeviceName(id) {
         if (id) {
             var name = await this.get(`device/${id}/name`);
@@ -274,6 +279,9 @@ class Waziup {
         if (!resp.ok)
             throw data;
         return data;
+    }
+    async fetch(path, init) {
+        return univFetch(path, init);
     }
     async del(path) {
         var resp = await univFetch(this.toURL(path), {

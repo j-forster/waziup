@@ -68,15 +68,53 @@
 					<h1>Waziup</h1>
 				</a>
 				<p>This repository implements a client to call APIs of the Waziup Cloud and Wazigate platform.</p>
+				<p>Connect to the Waziup Cloud or to a Wazigate from a remote machine like this:</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> waziup <span class="hljs-keyword">from</span> <span class="hljs-string">"waziup"</span>;
 
-<span class="hljs-comment">// Read the name of this Wazigate.</span>
-<span class="hljs-keyword">var</span> name = <span class="hljs-keyword">await</span> waziup.getName();
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`This Wazigate is <span class="hljs-subst">${name}</span>`</span>);
+main();
 
-<span class="hljs-comment">// List the sensors of this Wazigate.</span>
-<span class="hljs-keyword">var</span> sensors = <span class="hljs-keyword">await</span> waiup.getSensors();
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`We have <span class="hljs-subst">${sensors.length}</span> sensors:`</span>, sensors);</code></pre>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+
+    <span class="hljs-comment">// connect to the Wazigate (or the Cloud).</span>
+    <span class="hljs-keyword">var</span> gateway = <span class="hljs-keyword">await</span> waziup.connect({
+        host: <span class="hljs-string">"wazigate.local"</span>, <span class="hljs-comment">// a local Wazigate</span>
+        <span class="hljs-comment">// host: "waziup.io", // or the Waziup Cloud</span>
+        username: <span class="hljs-string">"MyUsername"</span>,
+        password: <span class="hljs-string">"MyPassword"</span>
+    });
+
+    <span class="hljs-comment">// read the devices list</span>
+    <span class="hljs-keyword">var</span> devices = <span class="hljs-keyword">await</span> gateway.getDevices();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`We have <span class="hljs-subst">${devices.length}</span> devices:`</span>, devices);
+
+    <span class="hljs-comment">// rename a device</span>
+    gateway.setDeviceName(myDevice, <span class="hljs-string">"New Name :)"</span>);
+
+    <span class="hljs-comment">// upload a new sensor value</span>
+    <span class="hljs-keyword">var</span> value = <span class="hljs-number">47.5</span>; <span class="hljs-comment">// measurement value</span>
+    gateway.addSensorValues(myDevice, mySensor, value);
+}</code></pre>
+				<p>From inside a Waziup App things a little bit easier:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> waziup <span class="hljs-keyword">from</span> <span class="hljs-string">"waziup"</span>;
+
+main();
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>) </span>{
+
+    <span class="hljs-comment">// connect to the Wazigate</span>
+    <span class="hljs-keyword">var</span> gateway = <span class="hljs-keyword">await</span> waziup.connect();
+
+    <span class="hljs-comment">// read the Gateway ID</span>
+    <span class="hljs-keyword">var</span> id = <span class="hljs-keyword">await</span> gateway.getDeviceID();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`This is Wazigate #<span class="hljs-subst">${id}</span>.`</span>)
+
+    <span class="hljs-comment">// rename the gateway</span>
+    gateway.setDeviceName(<span class="hljs-string">"New Gateway :)"</span>);
+
+    <span class="hljs-comment">// upload a new sensor value</span>
+    <span class="hljs-keyword">var</span> value = <span class="hljs-number">47.5</span>; <span class="hljs-comment">// measurement value</span>
+    gateway.addSensorValues(mySensor, value);
+}</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -89,49 +127,52 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
+					<li class=" tsd-kind-class tsd-is-external">
 						<a href="classes/waziup.html" class="tsd-kind-icon">Waziup</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/connectsettings.html" class="tsd-kind-icon">Connect<wbr>Settings</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#actuator" class="tsd-kind-icon">Actuator</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#app" class="tsd-kind-icon">App</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#cloud" class="tsd-kind-icon">Cloud</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#cloudaction" class="tsd-kind-icon">Cloud<wbr>Action</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#cloudstatus" class="tsd-kind-icon">Cloud<wbr>Status</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#credentials" class="tsd-kind-icon">Credentials</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#device" class="tsd-kind-icon">Device</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#event" class="tsd-kind-icon">Event</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#gateway" class="tsd-kind-icon">Gateway</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#id" class="tsd-kind-icon">ID</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#meta" class="tsd-kind-icon">Meta</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#sensor" class="tsd-kind-icon">Sensor</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#value" class="tsd-kind-icon">Value</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
+					<li class=" tsd-kind-type-alias tsd-is-external">
 						<a href="globals.html#valuewithtime" class="tsd-kind-icon">Value<wbr>With<wbr>Time</a>
 					</li>
 					<li class=" tsd-kind-function">
